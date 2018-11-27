@@ -55,7 +55,7 @@ affinity: {}
 
 git:
   # URL of git repo with Kubernetes manifests; e.g. git.url=ssh://git@github.com/weaveworks/flux-example
-  url: "git@github.com:gilmoregrills/robinyonge.com.git"
+  url: "git@github.com:gilmoregrills/personal-test-cluster-flux-configs.git"
   # Branch of git repo to use for Kubernetes manifests
   branch: "master"
   # Path within git repo to locate Kubernetes manifests (relative path)
@@ -75,7 +75,5 @@ ssh:
   known_hosts: "\n"
 
 #for https://github.com/justinbarrick/fluxcloud/
-args:
+# args:
 # - --connect=ws://fluxcloud
-  - --ci-skip
-  - --ci-skip-message='skip ci'
