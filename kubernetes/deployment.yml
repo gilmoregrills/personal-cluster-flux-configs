@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
       - name: "robin-dot-com"
-        image: "eu.gcr.io/kube-personal/robin-dot-com:latest"
+        image: "eu.gcr.io/kube-personal/robin-dot-com:46c638900e3f625136d59b556532d8851616bd91"
 ---
 apiVersion: "autoscaling/v1"
 kind: "HorizontalPodAutoscaler"
