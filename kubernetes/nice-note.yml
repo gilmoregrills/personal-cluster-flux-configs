@@ -87,4 +87,4 @@ metadata:
 spec:
   backend:
     serviceName: nice-note-np
-    servicePort: 443
+    servicePort: 8443
