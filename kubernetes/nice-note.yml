@@ -67,6 +67,8 @@ metadata:
   name: nice-note-np
   annotations:
     cloud.google.com/app-protocols: '{"my-https-port":"HTTPS","my-http-port":"HTTP"}'
+  labels:
+    app: "nice-note"
 spec:
   type: NodePort
   selector:
