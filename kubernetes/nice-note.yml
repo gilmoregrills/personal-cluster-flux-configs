@@ -53,42 +53,42 @@ metadata:
 spec:
   ports:
   - protocol: "TCP"
-    port: 80
+    port: 443
     targetPort: 8443
   selector:
     app: "nice-note"
   type: "LoadBalancer"
   loadBalancerSourceRanges: {}
-  loadBalancerIP: ""
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: nice-note-np
-  namespace: noteapp
-  annotations:
-    cloud.google.com/app-protocols: '{"my-https-port":"HTTPS","my-http-port":"HTTP"}'
-  labels:
-    app: "nice-note"
-spec:
-  type: NodePort
-  selector:
-    app: "nice-note"
-  ports:
-  - name: my-https-port
-    port: 443
-    targetPort: 8443
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: nice-note-ingress
-  namespace: noteapp
-  annotations:
-    kubernetes.io/ingress.global-static-ip-name: "nice-note-ip"
-  labels:
-    app: "nice-note"
-spec:
-  backend:
-    serviceName: nice-note-np
-    servicePort: my-https-port
+  loadBalancerIP: "nice-note-ip"
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: nice-note-np
+#   namespace: noteapp
+#   annotations:
+#     cloud.google.com/app-protocols: '{"my-https-port":"HTTPS","my-http-port":"HTTP"}'
+#   labels:
+#     app: "nice-note"
+# spec:
+#   type: NodePort
+#   selector:
+#     app: "nice-note"
+#   ports:
+#   - name: my-https-port
+#     port: 443
+#     targetPort: 8443
+# ---
+# apiVersion: extensions/v1beta1
+# kind: Ingress
+# metadata:
+#   name: nice-note-ingress
+#   namespace: noteapp
+#   annotations:
+#     kubernetes.io/ingress.global-static-ip-name: "nice-note-ip"
+#   labels:
+#     app: "nice-note"
+# spec:
+#   backend:
+#     serviceName: nice-note-np
+#     servicePort: my-https-port
