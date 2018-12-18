@@ -54,11 +54,9 @@ spec:
   ports:
   - protocol: "TCP"
     port: 80
-    targetPort: 8080
+    targetPort: 80
   selector:
     app: "nice-note"
   type: "LoadBalancer"
-  loadBalancerSourceRanges:
-  - 143.252.0.0/16
-  - 2.29.246.133/32
+  loadBalancerSourceRanges: {}
   loadBalancerIP: ""
