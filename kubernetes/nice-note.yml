@@ -85,7 +85,7 @@ metadata:
   name: nice-note-ingress
   namespace: noteapp
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: "web-static-ip"
+    kubernetes.io/ingress.global-static-ip-name: "nice-note-ip"
   labels:
     app: "nice-note"
 spec:
