@@ -103,6 +103,9 @@ metadata:
   labels:
     app: "nice-note"
 spec:
+  backend:
+    serviceName: nice-note-lb
+    servicePort: 443
   rules:
   - http:
       paths:
