@@ -13,3 +13,20 @@ spec:
       name: letsencrypt-staging
     # Enable the HTTP-01 challenge provider
     http01: {}
+---
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: notes-dot-robinyonge-dot-com-crt
+spec:
+  secretName: notes-dot-robinyonge-dot-com-crt
+  dnsNames:
+  - notes.robinyonge.com
+  acme:
+    config:
+    - http01:
+      domains:
+      - notes.robinyonge.com
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
