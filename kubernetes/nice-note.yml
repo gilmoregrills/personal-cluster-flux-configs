@@ -107,17 +107,15 @@ spec:
   backend:
     serviceName: nice-note-nodeport
     servicePort: 443
-    protocol: HTTPS
   tls:
   - hosts:
     - notes.robinyonge.com
     secretName: notes-dot-robinyonge-dot-com-crt
   rules:
   - host: notes.robinyonge.com
-    http:
+    https:
       paths:
       - path: /webhook/*
         backend:
           serviceName: nice-note-nodeport
           servicePort: 443
-          protocol: HTTPS
