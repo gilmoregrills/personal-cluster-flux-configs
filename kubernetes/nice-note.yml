@@ -7,10 +7,11 @@ metadata:
 apiVersion: "extensions/v1beta1"
 kind: "Deployment"
 metadata:
-  name: "nice-note"
+  name: "nice-note-frontend"
   namespace: "noteapp"
   labels:
     app: "nice-note"
+    part: "frontend"
   annotations:
     flux.weave.works/automated: 'true'
 spec:
@@ -18,10 +19,38 @@ spec:
   selector:
     matchLabels:
       app: "nice-note"
+      part: "frontend"
   template:
     metadata:
       labels:
         app: "nice-note"
+        part: "frontend"
+    spec:
+      containers:
+      - name: "nice-note-frontend"
+        image: "eu.gcr.io/kube-personal/robin-dot-com:latest"
+---
+apiVersion: "extensions/v1beta1"
+kind: "Deployment"
+metadata:
+  name: "nice-note-webhook"
+  namespace: "noteapp"
+  labels:
+    app: "nice-note"
+    part: "webhook"
+  annotations:
+    flux.weave.works/automated: 'true'
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "nice-note"
+      part: "webhook"
+  template:
+    metadata:
+      labels:
+        app: "nice-note"
+        part: "webhook"
     spec:
       containers:
       - name: "nice-note"
@@ -30,14 +59,32 @@ spec:
 apiVersion: "autoscaling/v1"
 kind: "HorizontalPodAutoscaler"
 metadata:
-  name: "nice-note-hpa"
+  name: "nice-note-webhoook-hpa"
   namespace: "noteapp"
   labels:
     app: "nice-note"
+    part: "webhook"
 spec:
   scaleTargetRef:
     kind: "Deployment"
-    name: "nice-note"
+    name: "nice-note-webhook"
+    apiVersion: "apps/v1beta1"
+  minReplicas: 2
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+---
+apiVersion: "autoscaling/v1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "nice-note-frontend-hpa"
+  namespace: "noteapp"
+  labels:
+    app: "nice-note"
+    part: "frontend"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "nice-note-frontend"
     apiVersion: "apps/v1beta1"
   minReplicas: 2
   maxReplicas: 5
@@ -46,10 +93,11 @@ spec:
 apiVersion: "v1"
 kind: "Service"
 metadata:
-  name: "nice-note-lb"
+  name: "nice-note-webhook"
   namespace: "noteapp"
   labels:
     app: "nice-note"
+    part: "webhook"
 spec:
   ports:
   - protocol: "TCP"
@@ -57,39 +105,26 @@ spec:
     targetPort: 8443
   selector:
     app: "nice-note"
+    part: "webhook"
   type: "NodePort"
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: nice-note-np
-#   namespace: noteapp
-#   annotations:
-#     cloud.google.com/app-protocols: '{"my-https-port":"HTTPS","my-http-port":"HTTP"}'
-#   labels:
-#     app: "nice-note"
-# spec:
-#   type: NodePort
-#   selector:
-#     app: "nice-note"
-#   ports:
-#   - name: my-https-port
-#     port: 443
-#     targetPort: 8443
-# ---
-# apiVersion: extensions/v1beta1
-# kind: Ingress
-# metadata:
-#   name: nice-note-ingress
-#   namespace: noteapp
-#   annotations:
-#     kubernetes.io/ingress.global-static-ip-name: "nice-note-ip"
-#   labels:
-#     app: "nice-note"
-# spec:
-#   backend:
-#     serviceName: nice-note-np
-#     servicePort: my-https-port
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "nice-note-frontend"
+  namespace: "noteapp"
+  labels:
+    app: "nice-note"
+    part: "frontend"
+spec:
+  ports:
+  - protocol: "TCP"
+    port: 4430
+    targetPort: 8000
+  selector:
+    app: "nice-note"
+    part: "frontend"
+  type: "NodePort"
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -103,10 +138,19 @@ metadata:
   labels:
     app: "nice-note"
 spec:
-  rules:
+  backend:
+    serviceName: nice-note-frontend
+    servicePort: 4430
+  # rules:
+  # - http:
+  #     paths:
+  #     - path: /*
+  #       backend:
+  #         serviceName: nice-note-frontend
+  #         servicePort: 4430
   - http:
       paths:
       - path: /webhook/*
         backend:
-          serviceName: nice-note-lb
+          serviceName: nice-note-webhook
           servicePort: 443
