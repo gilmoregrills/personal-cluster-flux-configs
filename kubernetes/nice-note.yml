@@ -141,13 +141,6 @@ spec:
   backend:
     serviceName: nice-note-frontend
     servicePort: 4430
-  # rules:
-  # - http:
-  #     paths:
-  #     - path: /*
-  #       backend:
-  #         serviceName: nice-note-frontend
-  #         servicePort: 4430
   - http:
       paths:
       - path: /webhook/*
