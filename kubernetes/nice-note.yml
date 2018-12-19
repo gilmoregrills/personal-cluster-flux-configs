@@ -97,7 +97,8 @@ metadata:
   name: nice-note-ingress
   namespace: noteapp
   annotations:
-    # kubernetes.io/ingress.allow-http: "false"
+    kubernetes.io/tls-acme: 'true'
+    kubernetes.io/ingress.allow-http: "false"
     kubernetes.io/ingress.global-static-ip-name: "nice-note-ip"
     cloud.google.com/app-protocols: '{"my-https-port":"HTTPS","my-http-port":"HTTP"}'
   labels:
@@ -107,9 +108,14 @@ spec:
     serviceName: nice-note-nodeport
     servicePort: 443
   rules:
-  - http:
-      paths:
-      - path: /webhook/*
-        backend:
-          serviceName: nice-note-nodeport
-          servicePort: 443
+  - host: robinyonge.com
+    http:
+    paths:
+    - path: /webhook/*
+      backend:
+        serviceName: nice-note-nodeport
+        servicePort: 443
+  tls:
+  - secretName: robinyonge-dot-com-tls-cert
+      hosts:
+      - robinyonge.com
