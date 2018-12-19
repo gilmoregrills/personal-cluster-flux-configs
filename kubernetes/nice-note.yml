@@ -134,13 +134,20 @@ metadata:
   annotations:
     kubernetes.io/ingress.allow-http: "false"
     kubernetes.io/ingress.global-static-ip-name: "nice-note-ip"
-    cloud.google.com/app-protocols: '{"my-https-port":"HTTPS"}'
+    cloud.google.com/app-protocols: '{"my-https-port":"HTTPS","my-http-port":"HTTP"}'
   labels:
     app: "nice-note"
 spec:
   backend:
     serviceName: nice-note-frontend
     servicePort: 4430
+  # rules:
+  # - http:
+  #     paths:
+  #     - path: /*
+  #       backend:
+  #         serviceName: nice-note-frontend
+  #         servicePort: 4430
   - http:
       paths:
       - path: /webhook/*
