@@ -141,7 +141,7 @@ spec:
   backend:
     serviceName: nice-note-frontend
     servicePort: 4430
-  # rules:
+  rules:
   # - http:
   #     paths:
   #     - path: /*
