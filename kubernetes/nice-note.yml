@@ -58,9 +58,6 @@ spec:
   - name: my-https-port
     port: 443
     targetPort: 8443
-  - name: my-http-port
-    port: 80
-    targetPort: 8080
   selector:
     app: "nice-note"
   type: "NodePort"
@@ -106,7 +103,6 @@ metadata:
     kubernetes.io/ingress.allow-http: "false"
     certmanager.k8s.io/cluster-issuer: letsencrypt-staging
     kubernetes.io/ingress.global-static-ip-name: "nice-note-ip"
-    cloud.google.com/app-protocols: '{"my-https-port":"HTTPS","my-http-port":"HTTP"}'
   labels:
     app: "nice-note"
 spec:
