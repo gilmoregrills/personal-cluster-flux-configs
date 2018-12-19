@@ -57,9 +57,7 @@ spec:
     targetPort: 8443
   selector:
     app: "nice-note"
-  type: "LoadBalancer"
-  loadBalancerSourceRanges: {}
-  loadBalancerIP: "nice-note-ip"
+  type: "NodePort"
 # ---
 # apiVersion: v1
 # kind: Service
@@ -92,3 +90,23 @@ spec:
 #   backend:
 #     serviceName: nice-note-np
 #     servicePort: my-https-port
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nice-note-ingress
+  namespace: noteapp
+  annotations:
+    kubernetes.io/ingress.allow-http: "false"
+    kubernetes.io/ingress.global-static-ip-name: "nice-note-ip"
+    cloud.google.com/app-protocols: '{"my-https-port":"HTTPS","my-http-port":"HTTP"}'
+  labels:
+    app: "nice-note"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /webhook/*
+        backend:
+          serviceName: nice-note-lb
+          servicePort: 443
