@@ -106,9 +106,9 @@ metadata:
   labels:
     app: "nice-note"
 spec:
-  backend:
-    serviceName: nice-note-nodeport
-    servicePort: 443
+  # backend:
+  #   serviceName: nice-note-nodeport
+  #   servicePort: 443
   tls:
   - hosts:
     - notes.robinyonge.com
