@@ -97,7 +97,7 @@ metadata:
   name: nice-note-ingress
   namespace: noteapp
   annotations:
-    # kubernetes.io/ingress.allow-http: "false"
+    kubernetes.io/ingress.allow-http: "false"
     certmanager.k8s.io/cluster-issuer: letsencrypt-staging
     kubernetes.io/ingress.global-static-ip-name: "nice-note-ip"
     cloud.google.com/app-protocols: '{"my-https-port":"HTTPS","my-http-port":"HTTP"}'
