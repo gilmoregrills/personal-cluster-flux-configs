@@ -107,6 +107,7 @@ spec:
   backend:
     serviceName: nice-note-nodeport
     servicePort: 443
+    protocol: HTTPS
   tls:
   - hosts:
     - notes.robinyonge.com
@@ -119,3 +120,4 @@ spec:
         backend:
           serviceName: nice-note-nodeport
           servicePort: 443
+          protocol: HTTPS
