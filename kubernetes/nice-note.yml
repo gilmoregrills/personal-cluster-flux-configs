@@ -46,7 +46,7 @@ spec:
 apiVersion: "v1"
 kind: "Service"
 metadata:
-  name: "nice-note-lb"
+  name: "nice-note-nodeport"
   namespace: "noteapp"
   labels:
     app: "nice-note"
@@ -97,7 +97,7 @@ metadata:
   name: nice-note-ingress
   namespace: noteapp
   annotations:
-    kubernetes.io/ingress.allow-http: "false"
+    # kubernetes.io/ingress.allow-http: "false"
     kubernetes.io/ingress.global-static-ip-name: "nice-note-ip"
     cloud.google.com/app-protocols: '{"my-https-port":"HTTPS","my-http-port":"HTTP"}'
   labels:
