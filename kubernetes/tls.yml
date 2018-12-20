@@ -22,13 +22,11 @@ spec:
   secretName: notes-dot-robinyonge-dot-com-crt
   dnsNames:
   - notes.robinyonge.com
-  - robinyonge.com
   acme:
     config:
     - http01:
       domains:
       - notes.robinyonge.com
-      - robinyonge.com
   issuerRef:
     name: letsencrypt-staging
     kind: ClusterIssuer
