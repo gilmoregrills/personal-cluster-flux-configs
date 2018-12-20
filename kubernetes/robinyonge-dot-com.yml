@@ -62,3 +62,22 @@ spec:
   - 143.252.0.0/16
   - 2.29.246.133/32
   loadBalancerIP: ""
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "robin-dot-com-nodeport"
+  namespace: "robin"
+  labels:
+    app: "robin-dot-com"
+  annotations:
+    cloud.google.com/app-protocols: '{"my-https-port":"HTTPS","my-http-port":"HTTP"}'
+    service.alpha.kubernetes.io/app-protocols: '{"my-first-port":"HTTPS","my-second-port":"HTTP"}'
+spec:
+  ports:
+  - name: my-https-port-2
+    port: 443
+    targetPort: 8000
+  selector:
+    app: "robin-dot-com"
+  type: "NodePort"
