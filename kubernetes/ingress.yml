@@ -15,7 +15,6 @@ spec:
   tls:
   - hosts:
     - notes.robinyonge.com
-    secretName: notes-dot-robinyonge-dot-com-crt
     - robinyonge.com
     secretName: notes-dot-robinyonge-dot-com-crt
   rules:
