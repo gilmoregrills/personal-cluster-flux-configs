@@ -12,6 +12,9 @@ metadata:
   labels:
     app: "nice-note"
 spec:
+  backend:
+    serviceName: robin-dot-com-nodeport
+    servicePort: 443
   tls:
   - hosts:
     - robinyonge.com
@@ -20,14 +23,14 @@ spec:
   - host: robinyonge.com
     http:
       paths:
-      - path: /webhook/*
+      - path: /webhook
         backend:
           serviceName: nice-note-nodeport
           servicePort: 443
   - host: robinyonge.com
     http:
       paths:
-      - path: /*
+      - path: /
         backend:
           serviceName: robin-dot-com-nodeport
           servicePort: 443
