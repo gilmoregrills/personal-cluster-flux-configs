@@ -14,12 +14,10 @@ metadata:
 spec:
   tls:
   - hosts:
-    - notes.robinyonge.com
-      secretName: notes-dot-robinyonge-dot-com-crt
     - robinyonge.com
-      secretName: robinyonge-dot-com-crt
+    secretName: robinyonge-dot-com-crt
   rules:
-  - host: notes.robinyonge.com
+  - host: robinyonge.com
     http:
       paths:
       - path: /webhook/*
