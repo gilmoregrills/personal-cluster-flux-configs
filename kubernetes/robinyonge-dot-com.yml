@@ -60,7 +60,7 @@ spec:
   type: "LoadBalancer"
   loadBalancerSourceRanges:
   - 143.252.0.0/16
-  - 2.29.246.133/32
+  - 2.29.246.196/32
   loadBalancerIP: ""
 ---
 apiVersion: v1
