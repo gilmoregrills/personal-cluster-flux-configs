@@ -87,6 +87,9 @@ kind: Service
 metadata:
   name: nice-note-nodeport
   namespace: "noteapp"
+  annotations:
+    cloud.google.com/app-protocols: '{"my-https-port":"HTTPS","my-http-port":"HTTP"}'
+    service.alpha.kubernetes.io/app-protocols: '{"my-first-port":"HTTPS","my-second-port":"HTTP"}'
 spec:
   ports:
      -  port: 443
