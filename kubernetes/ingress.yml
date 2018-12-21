@@ -15,9 +15,9 @@ metadata:
   labels:
     app: "nice-note"
 spec:
-  backend:
-    serviceName: nginx-ingress-default-backend
-    servicePort: 80
+  # backend:
+  #   serviceName: nginx-ingress-default-backend
+  #   servicePort: 80
   tls:
   - hosts:
     - notes.robinyonge.com
