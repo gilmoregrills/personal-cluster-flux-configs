@@ -17,12 +17,12 @@ spec:
   tls:
   - hosts:
     - notes.robinyonge.com
-    secretName: notes-dot-robinyonge-dot-com-crt
+    secretName: notes-dot-robinyonge-dot-com-cert
   rules:
   - host: notes.robinyonge.com
     http:
       paths:
-      - path: /*
+      - path: /
         backend:
           serviceName: nice-note-nodeport
           servicePort: 443
@@ -45,12 +45,12 @@ spec:
   tls:
   - hosts:
     - robinyonge.com
-    secretName: robinyonge-dot-com-crt
+    secretName: robinyonge-dot-com-cert
   rules:
   - host: robinyonge.com
     http:
       paths:
-      - path: /*
+      - path: /
         backend:
           serviceName: robinyonge-dot-com-nodeport
           servicePort: 443

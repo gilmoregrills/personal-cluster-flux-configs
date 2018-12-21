@@ -17,9 +17,9 @@ spec:
 apiVersion: certmanager.k8s.io/v1alpha1
 kind: Certificate
 metadata:
-  name: notes-dot-robinyonge-dot-com-crt
+  name: notes-dot-robinyonge-dot-com-cert
 spec:
-  secretName: notes-dot-robinyonge-dot-com-crt
+  secretName: notes-dot-robinyonge-dot-com-cert
   dnsNames:
   - notes.robinyonge.com
   acme:
@@ -34,9 +34,9 @@ spec:
 apiVersion: certmanager.k8s.io/v1alpha1
 kind: Certificate
 metadata:
-  name: robinyonge-dot-com-crt
+  name: robinyonge-dot-com-cert
 spec:
-  secretName: robinyonge-dot-com-crt
+  secretName: robinyonge-dot-com-cert
   dnsNames:
   - robinyonge.com
   acme:
