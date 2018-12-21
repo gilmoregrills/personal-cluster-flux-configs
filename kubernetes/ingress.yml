@@ -22,7 +22,7 @@ spec:
   - host: notes.robinyonge.com
     http:
       paths:
-      - path: /
+      - path: /*
         backend:
           serviceName: nice-note-nodeport
           servicePort: 443
@@ -50,7 +50,7 @@ spec:
   - host: robinyonge.com
     http:
       paths:
-      - path: /
+      - path: /*
         backend:
           serviceName: robinyonge-dot-com-nodeport
           servicePort: 443
