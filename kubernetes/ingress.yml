@@ -12,6 +12,9 @@ metadata:
   labels:
     app: "nice-note"
 spec:
+  backend:
+    serviceName: default-http-backend
+    servicePort: 80
   # tls:
   # - hosts:
   #   - notes.robinyonge.com
