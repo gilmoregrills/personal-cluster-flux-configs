@@ -10,7 +10,7 @@ spec:
     email: "robinfarrowyonge@gmail.com"
     # Name of a secret used to store the ACME account private key
     privateKeySecretRef:
-      name: IssuerPrivateKeyName
+      name: issuer-private-key
     # Enable the HTTP-01 challenge provider
     http01: {}
 ---
@@ -21,11 +21,13 @@ metadata:
   namespace: noteapp
 spec:
   secretName: notes-dot-robinyonge-dot-com-cert
+  commonName: notes.robinyonge.com
   dnsNames:
   - notes.robinyonge.com
   acme:
     config:
     - http01:
+        ingressClass: nginx
       domains:
       - notes.robinyonge.com
   issuerRef:
@@ -39,11 +41,13 @@ metadata:
   namespace: robin
 spec:
   secretName: robinyonge-dot-com-cert
+  commonName: robinyonge.com
   dnsNames:
   - robinyonge.com
   acme:
     config:
     - http01:
+        ingressClass: nginx
       domains:
       - robinyonge.com
   issuerRef:
