@@ -32,7 +32,7 @@ spec:
       - path: /
         backend:
           serviceName: robinyonge-dot-com-nodeport
-          servicePort: 80
+          servicePort: 443
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
