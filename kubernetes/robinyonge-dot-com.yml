@@ -62,3 +62,17 @@ spec:
   - 143.252.0.0/16
   - 2.29.246.133/32
   loadBalancerIP: ""
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: robinyonge-dot-com-nodeport
+  namespace: "robin"
+spec:
+  ports:
+     -  port: 80
+        protocol: TCP
+        targetPort: 8000
+  selector:
+    app: "robin-dot-com"
+  type: NodePort
