@@ -26,6 +26,27 @@ spec:
         backend:
           serviceName: nice-note-nodeport
           servicePort: 443
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: robinyonge-ingress
+  namespace: robin
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    kubernetes.io/ingress.allow-http: "true"
+    certmanager.k8s.io/cluster-issuer: letsencrypt-staging
+  labels:
+    app: "nice-note"
+spec:
+  backend:
+    serviceName: default-http-backend
+    servicePort: 80
+  tls:
+  - hosts:
+    - robinyonge.com
+    secretName: robinyonge-dot-com-crt
+  rules:
   - host: robinyonge.com
     http:
       paths:
