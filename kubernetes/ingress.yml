@@ -70,13 +70,13 @@ spec:
               name: https
               protocol: TCP
           volumeMounts:
-            - mountPath: /etc/nginx-ssl/dhparam
-              name: tls-dhparam-vol
+            - mountPath: /etc/nginx-ssl/tls
+              name: tls-vol
       terminationGracePeriodSeconds: 60
       volumes:
-        - name: tls-dhparam-vol
+        - name: tls-vol
           secret:
-            secretName: tls-dhparam
+            secretName: notes-dot-robinyonge-dot-com-crt
 ---
 apiVersion: v1
 kind: Service
