@@ -7,26 +7,25 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     # kubernetes.io/ingress.allow-http: "false"
-    # certmanager.k8s.io/cluster-issuer: letsencrypt-staging
-    # kubernetes.io/ingress.global-static-ip-name: "nice-note-ip"
+    certmanager.k8s.io/cluster-issuer: letsencrypt-staging
   labels:
     app: "nice-note"
 spec:
   backend:
     serviceName: default-http-backend
     servicePort: 80
-  # tls:
-  # - hosts:
-  #   - notes.robinyonge.com
-  #   secretName: notes-dot-robinyonge-dot-com-crt
+  tls:
+  - hosts:
+    - notes.robinyonge.com
+    secretName: notes-dot-robinyonge-dot-com-crt
   rules:
-  # - host: notes.robinyonge.com
-  - http:
-      paths:
-      - path: /
-        backend:
-          serviceName: nice-note-nodeport
-          servicePort: 443
+  - host: notes.robinyonge.com
+    - http:
+        paths:
+        - path: /
+          backend:
+            serviceName: nice-note-nodeport
+            servicePort: 443
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
