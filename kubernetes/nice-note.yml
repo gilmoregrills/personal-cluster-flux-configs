@@ -62,25 +62,6 @@ spec:
   - 143.252.0.0/16
   - 2.29.246.196/32
   loadBalancerIP: ""
-# ---
-# apiVersion: "v1"
-# kind: "Service"
-# metadata:
-#   name: "nice-note-nodeport"
-#   namespace: "noteapp"
-#   labels:
-#     app: "nice-note"
-#   annotations:
-#     cloud.google.com/app-protocols: '{"my-https-port":"HTTPS","my-http-port":"HTTP"}'
-#     service.alpha.kubernetes.io/app-protocols: '{"my-first-port":"HTTPS","my-second-port":"HTTP"}'
-# spec:
-#   ports:
-#   - name: my-https-port
-#     port: 443
-#     targetPort: 8443
-#   selector:
-#     app: "nice-note"
-#   type: "NodePort"
 ---
 apiVersion: v1
 kind: Service
