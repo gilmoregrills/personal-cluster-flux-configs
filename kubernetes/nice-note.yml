@@ -14,7 +14,7 @@ metadata:
   annotations:
     flux.weave.works/automated: 'true'
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: "nice-note"
@@ -39,7 +39,7 @@ spec:
     kind: "Deployment"
     name: "nice-note"
     apiVersion: "apps/v1beta1"
-  minReplicas: 2
+  minReplicas: 1
   maxReplicas: 5
   targetCPUUtilizationPercentage: 80
 ---
