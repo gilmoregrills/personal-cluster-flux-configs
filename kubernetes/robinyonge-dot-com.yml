@@ -26,6 +26,10 @@ spec:
       containers:
       - name: "robin-dot-com"
         image: "eu.gcr.io/kube-personal/robin-dot-com:latest"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
 ---
 apiVersion: "autoscaling/v1"
 kind: "HorizontalPodAutoscaler"
