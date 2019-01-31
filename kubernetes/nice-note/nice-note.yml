@@ -26,10 +26,6 @@ spec:
       containers:
       - name: "nice-note"
         image: "eu.gcr.io/kube-personal/nice-note:latest"
-      resources:
-          requests:
-            cpu: 100m
-            memory: 128Mi
 ---
 apiVersion: "autoscaling/v1"
 kind: "HorizontalPodAutoscaler"

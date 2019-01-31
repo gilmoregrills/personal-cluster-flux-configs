@@ -1,37 +1,4 @@
 ---
-apiVersion: v1
-kind: Secret
-metadata:
-  name: flux-git-deploy
-  namespace: kube-system
-type: Opaque
----
-# The service account, cluster roles, and cluster role binding are
-# only needed for Kubernetes with role-based access control (RBAC).
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  labels:
-    name: flux
-  name: flux
-  namespace: kube-system
----
-apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
-metadata:
-  labels:
-    name: flux
-  name: flux-cluster-admin
-  namespace: kube-system
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
-subjects:
-  - kind: ServiceAccount
-    name: flux
-    namespace: kube-system
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -65,19 +32,9 @@ spec:
         emptyDir:
           medium: Memory
 
-      # The following volume is for using a customised known_hosts
-      # file, which you will need to do if you host your own git
-      # repo rather than using github or the like. You'll also need to
-      # mount it into the container, below. See
-      # https://github.com/weaveworks/flux/blob/master/site/standalone/setup.md#using-a-private-git-host
-      # - name: ssh-config
-      #   configMap:
-      #     name: flux-ssh-config
-
       containers:
       - name: flux
-        # There are no ":latest" images for flux. Find the most recent
-        # release or image version at https://quay.io/weaveworks/flux
+        # Release or image version at https://quay.io/weaveworks/flux
         # and replace the tag here.
         image: quay.io/weaveworks/flux:1.8.2
         imagePullPolicy: IfNotPresent
@@ -111,9 +68,9 @@ spec:
         # replace or remove the following URL
         - --git-url=git@github.com:gilmoregrills/personal-test-cluster-flux-configs.git
         - --git-branch=master
+        - --git-path=kubernetes
         - --git-poll-interval=120s
         - --registry-poll-interval=120s
-        - --git-path=kubernetes
         # include these next two to connect to an "upstream" service
         # (e.g., Weave Cloud). The token is particular to the service.
         # - --connect=wss://cloud.weave.works/api/flux
@@ -126,4 +83,3 @@ spec:
         # list of valid namespaces to export, empty for all namespaces.
         # comma separated list of namespaces to monitor for workloads.
         - --k8s-namespace-whitelist=kube-system
-
